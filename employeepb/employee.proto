@@ -1,0 +1,48 @@
+syntax="proto3";
+
+package employee;
+
+option go_package = "employeepb";
+
+message EmployeeRequest{
+  uint32 employee_id = 1;
+  string full_name = 2;
+  string email = 3;
+  string phone_number = 4;
+  string address = 5;
+  bool gender = 6;
+  string job_title = 7;
+}
+
+message EmployeeResponse{
+  uint32 employee_id = 1;
+  string full_name = 2;
+  string email = 3;
+  string phone_number = 4;
+  string address = 5;
+  bool gender = 6;
+  string job_title = 7;
+}
+
+message ListEmployeesRequest{
+  uint32 limit = 1;
+  uint32 offset = 2;
+}
+
+message CreateEmployeeResponse{
+  uint32 status_code = 1;
+  string status_msg = 2;
+}
+
+message DeleteEmployeeResponse{
+  uint32 status_code = 1;
+  string status_msg = 2;
+}
+
+service EmployeeService{
+  rpc GetEmployee(EmployeeRequest) returns (EmployeeResponse) {}
+  rpc GetListEmployees(ListEmployeesRequest) returns (stream EmployeeResponse){}
+  rpc CreateEmployee(EmployeeRequest) returns (CreateEmployeeResponse){}
+  rpc DeleteEmployee(EmployeeRequest) returns (DeleteEmployeeResponse){}
+  rpc UpdateEmployee(EmployeeRequest) returns (EmployeeResponse){}
+}
